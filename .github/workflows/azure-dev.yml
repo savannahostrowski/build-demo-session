@@ -41,13 +41,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      # - name: Create filter to check if infra/ has changed
-      #   uses: dorny/paths-filter@v2
-      #   id: changes
-      #   with:
-      #     filters: |
-      #       infra:
-      #         - 'infra/**'
+      - name: Create filter to check if infra/ has changed
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            infra:
+              - 'infra/**'
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
