@@ -42,7 +42,7 @@ jobs:
           python-version: '3.11'
 
       - name: Create filter to check if infra/ has changed
-      - uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v2
         id: filter
         with:
           filters: |
