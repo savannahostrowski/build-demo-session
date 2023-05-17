@@ -43,7 +43,7 @@ jobs:
 
       - name: Create filter to check if infra/ has changed
         uses: dorny/paths-filter@v2
-        id: infra
+        id: filter
         with:
           filters: |
             infra:
