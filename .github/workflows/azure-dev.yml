@@ -42,7 +42,7 @@ jobs:
           python-version: '3.11'
 
       - name: Create filter to check if infra/ has changed
-        uses: dorny/paths-filter@v2
+      - uses: dorny/paths-filter@v2
         id: filter
         with:
           filters: |
@@ -59,7 +59,7 @@ jobs:
         shell: pwsh
 
       - name: Refresh the environment to grab values when re-provisioning is not needed
-        if: steps.changes.outputs.infra == 'false'
+        if: steps.filter.outputs.infra == 'false'
         run: azd env refresh --no-prompt
         env:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
@@ -67,7 +67,7 @@ jobs:
           AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
       - name: Provision Infrastructure, if infra/ has changed
-        if: steps.changes.outputs.infra == 'true'
+        if: steps.filter.outputs.infra == 'true'
         run: azd provision --no-prompt
         env:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
